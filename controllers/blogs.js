@@ -95,7 +95,6 @@ blogsRouter.put('/:id', (request, response, next) => {
     author: body.author || '',
     url: body.url,
     likes: body.likes || 0
-    // important: body.important,
   }
 
   Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
