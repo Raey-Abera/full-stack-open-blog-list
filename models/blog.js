@@ -1,11 +1,21 @@
 const mongoose = require('mongoose')
 
 const blogSchema = new mongoose.Schema({
-  title: String,
+  title: { type: String, required: true },
   author: String,
-  url: String,
-  likes: Number
+  url: { type: String, required: true },
+  likes: Number,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 })
+
+// title: { type: String, required: true },
+// author: String,
+// url: { type: String, required: true },
+// likes: Number,
+// user: { type: mongoose.SchemaTypes.ObjectId, ref: "User" },
 
 blogSchema.set('toJSON', {
   transform: (document, returnedObject) => {
@@ -15,4 +25,4 @@ blogSchema.set('toJSON', {
   }
 })
 
-module.exports = mongoose.model('blog', blogSchema)
+module.exports = mongoose.model('Blog', blogSchema)

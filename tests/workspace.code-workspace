@@ -1,0 +1,124 @@
+{
+	"folders": [
+		{
+			"name": "changeToAnagram",
+			"path": "../../changeToAnagram"
+		},
+		{
+			"name": "code-wars-challenge",
+			"path": "../../code-wars-challenge"
+		},
+		{
+			"name": "code_wars",
+			"path": "../../code_wars"
+		},
+		{
+			"name": "checkSubstringAnagram.js",
+			"path": "../../checkSubstringAnagram.js"
+		},
+		{
+			"name": "multiplyBy",
+			"path": "../../multiplyBy"
+		},
+		{
+			"name": "palindrome",
+			"path": "../../palindrome"
+		},
+		{
+			"name": "reverseString",
+			"path": "../../reverseString"
+		},
+		{
+			"name": "chunkAndSort",
+			"path": "../../chunkAndSort"
+		},
+		{
+			"name": "MultiplyNum",
+			"path": "../../MultiplyNum"
+		},
+		{
+			"name": "howManyAnagrams",
+			"path": "../../howManyAnagrams"
+		},
+		{
+			"name": "capitalize(str)",
+			"path": "../../capitalize(str)"
+		},
+		{
+			"name": "practice",
+			"path": "../../practice"
+		},
+		{
+			"name": "stack",
+			"path": "../../stack"
+		},
+		{
+			"name": "queue",
+			"path": "../../queue"
+		},
+		{
+			"name": "ultimate-guide-to-javascript-algorithms",
+			"path": "../../ultimate-guide-to-javascript-algorithms"
+		},
+		{
+			"path": "../../alumni-class-coding-challenge01"
+		},
+		{
+			"path": "../../alumni-class-coding-challenge02"
+		},
+		{
+			"path": "../../alumni-class-coding-challenge03"
+		},
+		{
+			"path": "../../alumni-exercises-1.1-1.14"
+		},
+		{
+			"path": "../../alumni-exercises-2.1-2.20"
+		},
+		{
+			"path": "../../alumni-exercises-0.1-0.6"
+		},
+		{
+			"path": "../../code-challenges-2020"
+		},
+		{
+			"path": "../../alumni-week2-coding-challenges"
+		},
+		{
+			"path": "../../alumni-week01-coding-challenges"
+		},
+		{
+			"path": "../../codeWars"
+		},
+		{
+			"path": "../../phoneBookNodeExpress"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../methodsPractice"
+		},
+		{
+			"path": "../../javascript_cardio"
+		},
+		{
+			"path": "../../quickSortShort"
+		},
+		{
+			"path": "../../auto-bot"
+		},
+		{
+			"path": "../../alumni-exercises-3.1-3.22/phone-book-front-end"
+		},
+		{
+			"path": "../../pick_up_bb_app"
+		},
+		{
+			"path": "../../bloglist-frontend"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "kayla"
+	}
+}

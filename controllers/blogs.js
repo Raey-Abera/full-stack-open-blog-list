@@ -1,8 +1,11 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
+const User = require('../models/user')
+const jwt = require('jsonwebtoken')
+const { ErrorHelper } = require('../utils/error_helper')
 
-blogsRouter.get('/', async (request, response) => { 
-  const blogs = await Blog.find({})
+blogsRouter.get('/', async (request, response) => {
+  const blogs = await Blog.find({}).populate('user', { username: 1, name: 1 })
   response.json(blogs)
 })
 
@@ -15,30 +18,82 @@ blogsRouter.get('/:id', async (request, response,) => {
   }
 })
 
+const getTokenFrom = request => {
+  const authorization = request.get('authorization')
+  console.log('this is authorization', authorization)
+  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
+    return authorization.substring(7)
+  }
+  return null
+}
+
 blogsRouter.post('/', async (request, response) => {
   const body = request.body
+  const token = getTokenFrom(request)
+  console.log('this is token', token)
+  const decodedToken = jwt.verify(token, process.env.SECRET)
+  if (!token || !decodedToken.id) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
+  const user = await User.findById(decodedToken.id)
+  // const user = await User.findById(body.userId)
 
   const blog = new Blog({
-    content: body.content,
-    important: body.important === undefined ? false : body.important,
-    date: new Date(),
+    title: body.title,
+    author: body.author || '',
+    url: body.url,
+    likes: body.likes || 0,
+    user: user._id
   })
 
   const savedBlog = await blog.save()
+  user.blogs = user.blogs.concat(savedBlog._id)
+  await user.save()
+
   response.json(savedBlog.toJSON())
 })
 
-blogsRouter.delete('/:id', async (request, response) => {
-  await Blog.findByIdAndRemove(request.params.id)
-  response.status(204).end()
+// blogsRouter.delete('/:id', async (request, response) => {
+//   await Blog.findByIdAndRemove(request.params.id)
+//   response.status(204).end()
+// })
+
+blogsRouter.delete('/:id', async (req, res, next) => {
+  const { token } = req
+
+  try {
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY)
+    if (!token || !decodedToken.id) {
+      throw new ErrorHelper(401, 'Authentication Error', [
+        'Invalid or missing authentication token',
+      ])
+    }
+
+    const blog = await Blog.findById(req.params.id)
+    if (!blog) return res.status(404).end()
+
+    const belongsToUser = blog.user.toString() === decodedToken.id
+    if (belongsToUser) {
+      await blog.remove()
+      return res.status(204).end()
+    }
+    throw new ErrorHelper(403, 'Forbidden', [
+      'User is not permitted to modify this resource',
+    ])
+  } catch (e) {
+    return next(e)
+  }
 })
 
 blogsRouter.put('/:id', (request, response, next) => {
   const body = request.body
 
   const blog = {
-    content: body.content,
-    important: body.important,
+    title: body.title,
+    author: body.author || '',
+    url: body.url,
+    likes: body.likes || 0
+    // important: body.important,
   }
 
   Blog.findByIdAndUpdate(request.params.id, blog, { new: true })

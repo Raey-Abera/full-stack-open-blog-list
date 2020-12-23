@@ -41,6 +41,26 @@ const mostBlogs = listOfBlogs => {
   }
 }
 
+const mostLikes = listOfBlogs => {
+
+  //   const likes = listOfBlogs.map(blog => blog.likes)
+  //   const mostLikes =  Math.max(...likes)
+
+  let sum = 0
+  for (let i = 0; i < listOfBlogs.length; i++) {
+    if (listOfBlogs[i].author === 'Edsger W. Dijkstra') {
+      sum += listOfBlogs[i].likes
+    }
+  }
+
+  return {
+    author: 'Edsger W. Dijkstra',
+    likes: sum
+  }
+
+}
+
+
 // const mostLikes = listOfBlogs => {
 //   const likes = listOfBlogs.map(blog => blog.likes)
 //   const mostLikes = Math.max(...likes)
@@ -85,11 +105,11 @@ const mostBlogs = listOfBlogs => {
 //       }
 //       return hash
 //     }
-  
+
 //     const authors = listOfBlogs.map(item => item.author)
 //     const hashOfAuthors = createHash(authors)
 //     const mostBlogs = Math.max(...Object.values(hashOfAuthors))
-  
+
 //     for (let author in hashOfAuthors) {
 //       if (hashOfAuthors[author] === mostBlogs) {
 //         return {
@@ -97,7 +117,7 @@ const mostBlogs = listOfBlogs => {
 //           blogs: mostLikes
 //         }
 //       }
-  
+
 //     }
 //   }
 
@@ -130,6 +150,6 @@ module.exports = {
   totalLikes,
   favoriteBlog,
   mostBlogs,
-//   mostLikes
+  mostLikes
 }
 
