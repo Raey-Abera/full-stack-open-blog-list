@@ -30,7 +30,7 @@ const getTokenFrom = request => {
 blogsRouter.post('/', async (request, response) => {
   const body = request.body
   const token = getTokenFrom(request)
-  console.log('this is token', token)
+  console.log('THIS IS TOKEN', token)
   const decodedToken = jwt.verify(token, process.env.SECRET)
   if (!token || !decodedToken.id) {
     return response.status(401).json({ error: 'token missing or invalid' })
@@ -60,9 +60,11 @@ blogsRouter.post('/', async (request, response) => {
 
 blogsRouter.delete('/:id', async (req, res, next) => {
   const { token } = req
+  console.log('this is DELETE test', token)
+  console.log('this is REQ test', req)
 
   try {
-    const decodedToken = jwt.verify(token, process.env.SECRET_KEY)
+    const decodedToken = jwt.verify(token, process.env.SECRET)
     if (!token || !decodedToken.id) {
       throw new ErrorHelper(401, 'Authentication Error', [
         'Invalid or missing authentication token',
